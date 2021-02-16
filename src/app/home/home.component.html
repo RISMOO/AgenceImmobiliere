@@ -1,0 +1,39 @@
+
+<div class="container py-5">
+
+  <h1 class="display-4">Nos biens immobiliers</h1>
+  <div class="row mt-5">
+
+    <div class="col-sm-12 col-md-6 col-lg-4 mt-5" *ngFor="let property of properties; let i=index "><!--on va boucler sur notre tableau creer dans nottre app.ts-->
+      <div class="card h-100 shadow-lg" style="width: 18rem;">
+        <div *ngFor="let photo of property.photos;let first=first">
+        <img class="card-img-top"*ngIf="first" [src]="photo" alt="immobilier">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{property.title}}</h5>
+          <p class="card-text">{{property.category}}<span *ngIf="property.surface && property.surface !==''"> de {{property.surface}} m2</span><span *ngIf="property.rooms && property.rooms !==''">, {{property.rooms}}piece(s)</span>.</p>
+
+        <p>
+
+          {{property.price}} €
+        </p>
+
+
+          <p [ngStyle]="{color:getSoldValue(i)}"><!--couleur--><!--i=index-->
+            <span *ngIf="!property.sold">A vendre</span>
+            <span *ngIf="property.sold">Vendu!</span>
+          </p>
+
+
+          <div class="text-center">
+
+            <button class="btn btn-info bt" type="button" [routerLink]="['/property',i]">Voir ce bien</button>
+          </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>
